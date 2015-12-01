@@ -1,0 +1,9 @@
+table {
+    border-collapse: separate;
+    border-spacing: 5px;
+
+}
+
+.panel-body {
+    border-spacing: 0px;
+}
