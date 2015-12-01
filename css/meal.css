@@ -1,7 +1,5 @@
-table {
-    border-collapse: separate;
-    border-spacing: 5px;
-
+.well {
+    padding:5px 5px 5px 5px;
 }
 
 .panel-body {
