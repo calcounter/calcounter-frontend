@@ -1,19 +1,33 @@
 define([
+    'backbone',
+    'jquery',
     'underscore',
-    'views/base-view',
+    'handlebars',
+    'views/navbar-view',
     'text!templates/main-compositor.html'
 ], function(
+    Backbone,
+    $,
     _,
-    BaseView,
+    Handlebars,
+    NavbarView,
     mainCompositorTemplate
 ) {
-    var MainCompositorView = BaseView.extend({
-        render: function() {
-            this.$el.html(_.template(mainCompositorTemplate, {}));
-            return this;
+    var MainCompositorView = Backbone.View.extend({
+        // init here so it only compiles once
+        template: Handlebars.compile(mainCompositorTemplate),
+        navbar: new NavbarView(),
+
+        initialize: function() {
+            //tbd
         },
 
-    });
+        render: function() {
+            this.$el.html(this.template());
+            this.$('#navbar').html(this.navbar.render().el);
+            return this;
+        }
 
+    });
     return MainCompositorView;
 });

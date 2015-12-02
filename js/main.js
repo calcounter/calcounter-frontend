@@ -1,13 +1,12 @@
 require.config({
     paths: {
         backbone: 'vendor/backbone-min',
+        handlebars: 'vendor/handlebars-v4.0.5',
         jquery: 'vendor/jquery-1.11.3.min',
         underscore: 'vendor/underscore-min',
         text: 'vendor/text'
     },
 
-    // wraps modules, to make them compatible with requirejs w/ dependencies and exports
-    // jquery doesn't need a shim, it's already in the right format
     shim: {
         backbone: {
             deps: ['underscore', 'jquery'],
@@ -19,7 +18,6 @@ require.config({
     }
 });
 
-// init requirejs
 require(['app'], function(App) {
     App.initialize();
 });

@@ -1,0 +1,2 @@
+remove excess html from templates when they're ready to composite
+remove unused css
