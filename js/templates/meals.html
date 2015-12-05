@@ -1,0 +1,20 @@
+<div class="container panel-group" id="mealsContainer">
+    {{#each meals}}
+    <div class="panel panel-default">
+        <div class="panel-heading" id="mealName">
+            {{this.name}}
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-10" id="mealDescription">
+                {{this.description}}
+            </div>
+            <div class="col-sm-2" id="mealCalories">
+                {{this.calories}}
+            </div>
+        </div>
+        <div class="panel-footer" id="timestamp">
+            {{this.timestamp}}
+        </div>
+    </div>
+    {{/each}}
+</div>
