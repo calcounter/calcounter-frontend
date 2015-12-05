@@ -3,16 +3,16 @@ define([
     'jquery',
     'underscore',
     'handlebars',
-    'text!templates/home.html'
+    'text!templates/about.html'
 ],function(
     Backbone,
     $,
     _,
     Handlebars,
-    homeTemplate
+    aboutTemplate
 ) {
-    var HomeView = Backbone.View.extend({
-        template: Handlebars.compile(homeTemplate),
+    var AboutView = Backbone.View.extend({
+        template: Handlebars.compile(aboutTemplate),
 
         initialize: function() {
 
@@ -23,5 +23,5 @@ define([
             return this;
         }
     });
-    return HomeView;
+    return AboutView;
 });

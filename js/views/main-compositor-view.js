@@ -26,6 +26,25 @@ define([
             this.$el.html(this.template());
             this.$('#navbar').html(this.navbar.render().el);
             return this;
+        },
+
+        // renders the view of #content with a navbar
+        renderContentView: function() {
+            this.contentView && this.$('#content').html(this.contentView.render().el);
+        },
+
+        // sets the view of #content to view param and its title with helper functions
+        setContentView: function(title, view) {
+            this.contentView = view;
+            title && this.setTitle(title);
+            this.renderContentView();
+
+        },
+
+        // sets the view's title and #title
+        setTitle: function(title) {
+            this.title = title;
+            this.$('#title').text(title);
         }
 
     });

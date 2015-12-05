@@ -1,18 +1,23 @@
 define([
     'backbone',
     'jquery',
+    'views/about-view',
+    'views/home-view',
     'views/main-compositor-view'
 
 ], function(
     Backbone,
     $,
+    AboutView,
+    HomeView,
     MainCompositorView
 
 ) {
     var AppRouter = Backbone.Router.extend({
 
         routes: {
-            '*splat': 'home'
+            'about': 'about',
+            '*splat': 'home',
         },
 
         initialize: function() {
@@ -21,7 +26,11 @@ define([
         },
 
         home: function() {
+            this.mainCompositorView.setContentView('Home', new HomeView());
+        },
 
+        about: function() {
+            this.mainCompositorView.setContentView('About', new AboutView());
         }
     });
 
