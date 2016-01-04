@@ -6,6 +6,7 @@ define([
     'views/main-compositor-view',
     'views/meals-view',
     'views/profile-view',
+    'views/login-view'
 
 ], function(
     Backbone,
@@ -14,7 +15,8 @@ define([
     HomeView,
     MainCompositorView,
     MealsView,
-    ProfileView
+    ProfileView,
+    LoginView
 
 ) {
     var AppRouter = Backbone.Router.extend({
@@ -24,6 +26,7 @@ define([
             'home': 'home',
             'meals': 'mealsList',
             'profile': 'profile',
+            'login': 'login',
             '*splat': 'home',
         },
 
@@ -49,6 +52,10 @@ define([
         profile: function() {
             this.mainCompositorView.setContentView('Profile', new ProfileView());
         },
+
+        login: function() {
+            this.mainCompositorView.setContentView('Login', new LoginView());
+        }
 
     });
 

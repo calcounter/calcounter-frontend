@@ -3,12 +3,14 @@ define([
     'jquery',
     'underscore',
     'handlebars',
+    'views/login-view',
     'text!templates/navbar.html'
 ],function(
     Backbone,
     $,
     _,
     Handlebars,
+    LoginView,
     navbarTemplate
 ) {
     var NavbarView = Backbone.View.extend({

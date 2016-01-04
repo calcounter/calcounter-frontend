@@ -4,7 +4,8 @@ require.config({
         handlebars: 'vendor/handlebars-v4.0.5',
         jquery: 'vendor/jquery-1.11.3.min',
         underscore: 'vendor/underscore-min',
-        text: 'vendor/text'
+        text: 'vendor/text',
+        bootstrap: 'vendor/bootstrap'
     },
 
     shim: {
@@ -14,6 +15,9 @@ require.config({
         },
         underscore: {
             exports: '_'
+        },
+        bootstrap: {
+            deps: ['jquery']
         }
     }
 });
