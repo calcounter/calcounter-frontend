@@ -5,7 +5,8 @@ require.config({
         jquery: 'vendor/jquery-1.11.3.min',
         underscore: 'vendor/underscore-min',
         text: 'vendor/text',
-        bootstrap: 'vendor/bootstrap'
+        bootstrap: 'vendor/bootstrap',
+        collapse: 'vendor/collapse'
     },
 
     shim: {
@@ -18,6 +19,9 @@ require.config({
         },
         bootstrap: {
             deps: ['jquery']
+        },
+        collapse: {
+            deps: ['bootstrap']
         }
     }
 });
