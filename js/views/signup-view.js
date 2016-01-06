@@ -3,6 +3,7 @@ define([
     'underscore',
     'handlebars',
     'strings',
+    'models/session-model',
     'text!templates/signup.html'
 
 ], function(
@@ -10,10 +11,13 @@ define([
     _,
     Handlebars,
     strings,
+    SessionModel,
     signupTemplate
 ) {
     var SignupView = Backbone.View.extend({
         template: Handlebars.compile(signupTemplate),
+
+        sessionModel: SessionModel.getInstance(),
 
         events: {
             'click #signup-btn': 'signup',
@@ -35,7 +39,7 @@ define([
                     'password2': this.$('#password2').val()
                 }
             }).done(function(data) {
-                self.model.set('token', data.key);
+                self.sessionModel.set('token', data.key);
                 Backbone.history.navigate('home', {trigger: true});
             }).fail(function() {
                 self.$('#signup-failed').show();

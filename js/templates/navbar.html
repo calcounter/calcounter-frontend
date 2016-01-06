@@ -11,11 +11,14 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right" id="auth-container">
-                <li class="collapse" id="authenticated">
-                    <a >Logout</a>
+                <li class="collapse authenticated">
+                    <a role="button" id="btn-logout">Logout</a>
+                </li>
+                <li class="collapse authenticated">
+                    <a>Profile</a>
                 </li>
 
-                <li class="collapse" id="unauthenticated">
+                <li class="collapse unauthenticated">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Have an account?<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -29,7 +32,11 @@
                                         <input type="password" placeholder="Password" id="password" class="form-control" type="text">
                                     </div>
 
-                                    <button class="navbar-btn btn-default btn-sm">Log in</button>
+                                    <button class="navbar-btn btn-default btn-sm" id="btn-login">Log in</button>
+                                    <div class="collapse alert alert-warning " id="login-failed">
+                                        <strong>Login failed.</strong>
+                                        <p>Please try again.</p>
+                                    </div>
                                 </div>
 
                             </li>
@@ -37,9 +44,10 @@
                             <li>
                                 <div class="container-fluid">
                                     <h3 class="text-nowrap text-center">New to Calcounter?</h3>
-                                    <button class="navbar-btn btn-primary btn-sm">Sign up</button>
+                                    <button class="navbar-btn btn-primary btn-sm" id="btn-signup">Sign up</button>
                                 </div>
                             </li>
+
                         </ul>
                     </a>
                 </li>

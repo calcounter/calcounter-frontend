@@ -5,9 +5,9 @@ define([
     'handlebars',
     'bootstrap',
     'collapse',
+    'strings',
     'models/navbar-model',
     'models/session-model',
-    'views/login-view',
     'text!templates/navbar.html'
 ],function(
     Backbone,
@@ -16,15 +16,21 @@ define([
     Handlebars,
     Bootstrap,
     Collapse,
+    strings,
     NavbarModel,
     SessionModel,
-    LoginView,
     navbarTemplate
 ) {
     var NavbarView = Backbone.View.extend({
         template: Handlebars.compile(navbarTemplate),
 
         model: new NavbarModel(),
+
+        events: {
+            'click #btn-login': 'login',
+            'click #btn-logout': 'logout',
+            'click #btn-signup': 'signup',
+        },
 
         sessionModel: SessionModel.getInstance(),
 
@@ -34,10 +40,52 @@ define([
 
         render: function() {
             this.$el.html(this.template({
-                sections: this.sessionModel.isAuthenticated() ? this.model.get('authenticated') : this.model.get('unauthenticated'),
-                isAuthenticated: this.sessionModel.isAuthenticated()
+                sections: this.sessionModel.isAuthenticated() ?
+                    this.model.get('authenticated'):
+                    this.model.get('unauthenticated'),
+                isAuthenticated: this.sessionModel.isAuthenticated(),
             }));
+            this.sessionModel.isAuthenticated() == true ? this.$('.unauthenticated').hide() : this.$('.authenticated').hide()
             return this;
+
+        },
+
+        login: function() {
+            self = this;
+            $.ajax({
+                type: 'POST',
+                url: strings.baseServerUrl + 'rest-auth/login/',
+                data: {
+                    'username': this.$('#username').val(),
+                    'password': this.$('#password').val()
+                }
+            }).done(function(data) {
+                self.sessionModel.set('token', data.key);
+                self.$('.unauthenticated').hide();
+                self.$('.authenticated').show();
+
+            }).fail(function() {
+                self.$('#login-failed').show();
+            });
+            return false;
+        },
+
+        logout: function() {
+            self = this;
+            $.ajax({
+                type: 'POST',
+                url: strings.baseServerUrl + 'rest-auth/logout/',
+                data: {}
+            }).done(function() {
+                self.sessionModel.logout();
+                self.$('.authenticated').hide();
+                self.$('.unauthenticated').show();
+                Backbone.history.navigate('home', {trigger: true});
+            });
+        },
+
+        signup: function() {
+            Backbone.history.navigate('signup', {trigger: true});
         }
     });
     return NavbarView;

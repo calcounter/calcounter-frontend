@@ -33,7 +33,7 @@ define([
         logout: function() {
             this.set('token', null);
             localStorage.removeItem('token');
-            Backbone.history.navigate('login', {trigger: true});
+            Backbone.history.navigate('home', {trigger: true});
         },
 
         isAuthenticated: function() {
