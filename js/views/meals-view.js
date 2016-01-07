@@ -3,7 +3,7 @@ define([
     'jquery',
     'underscore',
     'handlebars',
-    'text!templates/meals.html'
+    'text!templates/meals-list.html'
 ],function(
     Backbone,
     $,

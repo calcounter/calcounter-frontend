@@ -6,7 +6,6 @@ define([
     'views/main-compositor-view',
     'views/meals-view',
     'views/profile-view',
-    'views/login-view',
     'views/signup-view'
 
 ], function(
@@ -17,7 +16,6 @@ define([
     MainCompositorView,
     MealsView,
     ProfileView,
-    LoginView,
     SignupView
 
 ) {
@@ -28,7 +26,6 @@ define([
             'home': 'home',
             'meals': 'mealsList',
             'profile': 'profile',
-            'login': 'login',
             'signup': 'signup',
             '*splat': 'home',
         },
@@ -54,10 +51,6 @@ define([
 
         profile: function() {
             this.mainCompositorView.setContentView('Profile', new ProfileView());
-        },
-
-        login: function() {
-            this.mainCompositorView.setContentView('Login', new LoginView());
         },
 
         signup: function() {

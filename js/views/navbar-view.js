@@ -30,6 +30,8 @@ define([
             'click #btn-login': 'login',
             'click #btn-logout': 'logout',
             'click #btn-signup': 'signup',
+            'click #btn-profile': 'profile',
+            'click #btn-meals': 'meals'
         },
 
         sessionModel: SessionModel.getInstance(),
@@ -86,6 +88,14 @@ define([
 
         signup: function() {
             Backbone.history.navigate('signup', {trigger: true});
+        },
+
+        profile: function() {
+            Backbone.history.navigate('profile', {trigger: true});
+        },
+
+        meals: function() {
+            Backbone.history.navigate('meals', {trigger: true});
         }
     });
     return NavbarView;
