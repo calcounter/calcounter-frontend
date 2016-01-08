@@ -4,7 +4,10 @@ define([
     'handlebars',
     'strings',
     'models/session-model',
-    'text!templates/signup.html'
+    'views/main-compositor-view',
+    'text!templates/signup.html',
+    'text!templates/alerts/signup-done.html',
+    'text!templates/alerts/signup-fail.html'
 
 ], function(
     $,
@@ -12,10 +15,15 @@ define([
     Handlebars,
     strings,
     SessionModel,
-    signupTemplate
+    MainCompositorView,
+    signupTemplate,
+    signupAlertDone,
+    signupAlertFail
 ) {
     var SignupView = Backbone.View.extend({
         template: Handlebars.compile(signupTemplate),
+
+        compositorView: MainCompositorView.getInstance(),
 
         sessionModel: SessionModel.getInstance(),
 
@@ -41,8 +49,9 @@ define([
             }).done(function(data) {
                 self.sessionModel.set('token', data.key);
                 Backbone.history.navigate('home', {trigger: true});
+                self.compositorView.addAlert(signupAlertDone);
             }).fail(function() {
-                self.$('#signup-failed').show();
+                self.compositorView.addAlert(signupAlertFail);
             });
             return false;
         }

@@ -31,7 +31,7 @@ define([
         },
 
         initialize: function() {
-            this.mainCompositorView = new MainCompositorView();
+            this.mainCompositorView = MainCompositorView.getInstance();
             $('body').html(this.mainCompositorView.render().el);
         },
 

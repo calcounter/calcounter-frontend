@@ -33,6 +33,10 @@ define([
             this.contentView && this.$('#content').html(this.contentView.render().el);
         },
 
+        renderAlertView: function() {
+            this.$('#alerts').append(this.alertTemplate());
+        },
+
         // sets the view of #content to view param and its title with helper functions
         setContentView: function(title, view) {
             this.contentView = view;
@@ -45,8 +49,20 @@ define([
         setTitle: function(title) {
             this.title = title;
             this.$('#title').text(title);
-        }
+        },
 
+        // shows an alert below the navbar
+        addAlert: function(template) {
+            this.alertTemplate = Handlebars.compile(template);
+            this.renderAlertView();
+        },
+
+    }, {
+        getInstance: function() {
+
+            this.instance = this.instance || new MainCompositorView();
+            return this.instance;
+        }
     });
     return MainCompositorView;
 });
