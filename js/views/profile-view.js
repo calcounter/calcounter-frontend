@@ -5,9 +5,14 @@ define([
     'handlebars',
     'strings',
     'alert',
+    'views/main-compositor-view',
     'models/session-model',
     'models/profile-model',
-    'text!templates/profile.html'
+    'text!templates/profile.html',
+    'text!templates/alerts/profile-info-done.html',
+    'text!templates/alerts/profile-info-fail.html',
+    'text!templates/alerts/profile-password-done.html',
+    'text!templates/alerts/profile-password-fail.html',
 ],function(
     Backbone,
     $,
@@ -15,14 +20,21 @@ define([
     Handlebars,
     strings,
     Alert,
+    MainCompositorView,
     SessionModel,
     ProfileModel,
-    profileTemplate
+    profileTemplate,
+    infoAlertDone,
+    infoAlertFail,
+    passwordAlertDone,
+    passwordAlertFail
 ) {
     var ProfileView = Backbone.View.extend({
         template: Handlebars.compile(profileTemplate),
 
         model: ProfileModel.getInstance(),
+
+        compositorView: MainCompositorView.getInstance(),
 
         sessionModel: SessionModel.getInstance(),
 
@@ -57,9 +69,9 @@ define([
             }, {
                 patch: true
             }).done(function() {
-                self.$('#update-information-done').show();
+                self.compositorView.addAlert(infoAlertDone);
             }).fail(function() {
-                self.$('#update-information-fail').show();
+                self.compositorView.addAlert(infoAlertFail);
             });
         },
 
@@ -75,9 +87,9 @@ define([
                     'new_password2': this.$('#new-password2').val()
                 }
             }).done(function() {
-                self.$('#password-change-done').show();
+                self.compositorView.addAlert(passwordAlertDone);
             }).fail(function() {
-                self.$('#password-change-fail').show();
+                self.compositorView.addAlert(passwordAlertFail);
 
             });
         }

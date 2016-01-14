@@ -1,20 +1,83 @@
-<div class="container panel-group">
-    {{#each meals}}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {{this.id}}
-        </div>
-        <div class="panel-body">
-            <div class="col-sm-10">
-                {{this.description}}
-            </div>
+<div class="col-sm-2"></div>
+<div class="container-fluid col-sm-8">
+
+    <h1>My Meals</h1>
+    <div class="well col-sm-12">
+        <label>Add a meal:</label>
+        <button role="button" class="pull-right btn-primary" id="btn-add-meal">Add this meal</button>
+
+        <div class="form-group">
             <div class="col-sm-2">
-                {{this.calories}}
+                <label>Calories:</label>
+                <input type="text" class="form-control" id="calories" placeholder="Calories">
             </div>
-        </div>
-        <div class="panel-footer">
-            {{this.datetime}}
+            <div class="col-sm-7">
+                <label>Description:</label>
+                <input type="text" class="form-control" id="description" placeholder="Description">
+            </div>
+            <div class="col-sm-3">
+                <label>Date and time:</label>
+                <div class="input-group date" id="datetimepicker-new">
+                    <input type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
-    {{/each}}
+
+    {{#if isPrevVisible}}
+        <button role="button" class="pull-left btn-default" id="btn-previous-page">Prev</button>
+    {{/if}}
+    {{#if isNextVisible}}
+        <button role="button" class="pull-right btn-default" id="btn-next-page">Next</button>
+    {{/if}}
+
+<!--
+    <div class="well col-sm-12" id="meals-container">
+        {{#each results}}
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{id}}
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-10">
+                    {{description}}
+                </div>
+                <div class="col-sm-2">
+                    {{calories}}
+                </div>
+            </div>
+            <div class="panel-footer">
+                {{datetime}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+-->
+
+    <table class="table table-striped">
+        <thead><tr>
+            <th class="">Calories</th>
+            <th class="">Description</th>
+            <th class="text-right">Date/Time</th>
+            <th class="col-sm-1"></th>
+        </tr></thead>
+        <tbody>
+        {{#each results}}
+        <tr>
+            <td>{{calories}}</td>
+            <td>{{description}}</td>
+            <td class="text-right">{{datetime}}</td>
+            <td class="text-right">
+                <span role="button" class="glyphicon glyphicon-edit" title="Edit" data-toggle="tooltip"  data-container="body"></span>
+                <span role="button" class="glyphicon glyphicon-remove" title="Remove" data-toggle="tooltip"  data-container="body"></span>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
 </div>
+<div class="col-sm-2"></div>

@@ -6,7 +6,7 @@ define([
     'bootstrap',
     'collapse',
     'strings',
-    'models/navbar-model',
+    'models/user-model',
     'models/session-model',
     'text!templates/navbar.html'
 ],function(
@@ -17,14 +17,16 @@ define([
     Bootstrap,
     Collapse,
     strings,
-    NavbarModel,
+    UserModel,
     SessionModel,
     navbarTemplate
 ) {
     var NavbarView = Backbone.View.extend({
         template: Handlebars.compile(navbarTemplate),
 
-        model: new NavbarModel(),
+        userModel: UserModel.getInstance(),
+
+        sessionModel: SessionModel.getInstance(),
 
         events: {
             'click #btn-login': 'login',
@@ -34,17 +36,16 @@ define([
             'click #btn-meals': 'meals'
         },
 
-        sessionModel: SessionModel.getInstance(),
 
         initialize: function() {
             this.sessionModel.on('change', this.render, this);
+            this.userModel.on('change', this.render, this);
+            this.sessionModel.isAuthenticated() && this.userModel.fetch();
         },
 
         render: function() {
             this.$el.html(this.template({
-                sections: this.sessionModel.isAuthenticated() ?
-                    this.model.get('authenticated'):
-                    this.model.get('unauthenticated'),
+                username: this.userModel.get('username'),
                 isAuthenticated: this.sessionModel.isAuthenticated(),
             }));
             this.sessionModel.isAuthenticated() == true ? this.$('.unauthenticated').hide() : this.$('.authenticated').hide()
@@ -65,7 +66,9 @@ define([
                 self.sessionModel.set('token', data.key);
                 self.$('.unauthenticated').hide();
                 self.$('.authenticated').show();
-
+                self.userModel.fetch();
+                // if user is on the signup page and logs in, navigates away.
+                //$('title').text() == "Signup" && Backbone.history.navigate('home', {trigger: true});
             }).fail(function() {
                 self.$('#login-failed').show();
             });

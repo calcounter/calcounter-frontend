@@ -1,4 +1,3 @@
-how do I use page specific html? is this best practice?
-main compositor logic (&&)
-
+TODO:
+refactor bootstrap plugins. all are included in bootstrap.js
 

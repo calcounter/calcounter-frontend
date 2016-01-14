@@ -1,9 +1,22 @@
+@import url("bootstrap-datetimepicker.css");
+
 .navbar-brand {
     line-height: 12px;
     padding-bottom:5px;
 }
 
+.navbar {
+    margin-bottom: 1px;
+}
+
 .alert {
+    text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-bottom: 1px;
+    margin-top:1px;
+}
+
+.alert-dismissible {
+   width: 100%;
 }

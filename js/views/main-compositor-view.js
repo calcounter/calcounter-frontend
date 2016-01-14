@@ -16,10 +16,11 @@ define([
     var MainCompositorView = Backbone.View.extend({
         // init here so it only compiles once
         template: Handlebars.compile(mainCompositorTemplate),
+
         navbar: new NavbarView(),
 
         initialize: function() {
-            //tbd
+
         },
 
         render: function() {
@@ -35,6 +36,9 @@ define([
 
         renderAlertView: function() {
             this.$('#alerts').append(this.alertTemplate());
+            this.$('.alert-dismissible').fadeTo(5000, 500).slideUp(500, function() {
+                this.remove();
+            });
         },
 
         // sets the view of #content to view param and its title with helper functions
@@ -48,14 +52,16 @@ define([
         // sets the view's title and #title
         setTitle: function(title) {
             this.title = title;
-            this.$('#title').text(title);
+            $('title').text(title);
         },
+
 
         // shows an alert below the navbar
         addAlert: function(template) {
             this.alertTemplate = Handlebars.compile(template);
             this.renderAlertView();
         },
+
 
     }, {
         getInstance: function() {

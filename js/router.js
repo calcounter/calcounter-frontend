@@ -24,7 +24,7 @@ define([
         routes: {
             'about': 'about',
             'home': 'home',
-            'meals': 'mealsList',
+            'meals(/:page)': 'mealsList',
             'profile': 'profile',
             'signup': 'signup',
             '*splat': 'home',
@@ -38,23 +38,25 @@ define([
         /* Routes */
 
         about: function() {
-            this.mainCompositorView.setContentView('About', new AboutView());
+            this.mainCompositorView.setContentView('About | Calcounter', new AboutView());
         },
 
         home: function() {
-            this.mainCompositorView.setContentView('Home', new HomeView());
+            this.mainCompositorView.setContentView('Home | Calcounter', new HomeView());
         },
 
-        mealsList: function() {
-            this.mainCompositorView.setContentView('Meals', new MealsView());
+        mealsList: function(page) {
+            this.mainCompositorView.setContentView('Meals | Calcounter', new MealsView({
+                page: page
+            }));
         },
 
         profile: function() {
-            this.mainCompositorView.setContentView('Profile', new ProfileView());
+            this.mainCompositorView.setContentView('Profile | Calcounter', new ProfileView());
         },
 
         signup: function() {
-            this.mainCompositorView.setContentView('Signup', new SignupView());
+            this.mainCompositorView.setContentView('Signup | Calcounter', new SignupView());
         }
 
     });

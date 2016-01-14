@@ -1,13 +1,14 @@
 define([
-    'backbone'
+    'backbone',
+    'strings',
+    'moment'
 ], function(
-    Backbone
+    Backbone,
+    strings,
+    moment
 ) {
     var MealModel = Backbone.Model.extend({
-        defaults: {
-            description: "desc",
-            calories: "cals",
-            datetime: new Date()
-        }
-    })
+        url: strings.baseServerUrl + 'meals/',
+    });
+    return MealModel;
 });

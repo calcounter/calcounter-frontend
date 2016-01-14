@@ -7,7 +7,11 @@ require.config({
         text: 'vendor/text',
         bootstrap: 'vendor/bootstrap',
         collapse: 'vendor/collapse',
-        alert: 'vendor/alert'
+        alert: 'vendor/alert',
+        transition: 'vendor/transition',
+        moment: 'vendor/moment.min',
+        datetimepicker: 'vendor/bootstrap-datetimepicker.min',
+        backbonepaginator: 'vendor/backbone.paginator'
     },
 
     shim: {
@@ -21,6 +25,12 @@ require.config({
             deps: ['bootstrap']
         },
         alert: {
+            deps: ['bootstrap']
+        },
+        transition: {
+            deps: ['bootstrap']
+        },
+        tooltip: {
             deps: ['bootstrap']
         }
     }

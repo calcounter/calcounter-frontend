@@ -3,6 +3,7 @@ define([
     'underscore',
     'handlebars',
     'strings',
+    'models/user-model',
     'models/session-model',
     'views/main-compositor-view',
     'text!templates/signup.html',
@@ -14,6 +15,7 @@ define([
     _,
     Handlebars,
     strings,
+    UserModel,
     SessionModel,
     MainCompositorView,
     signupTemplate,
@@ -24,6 +26,8 @@ define([
         template: Handlebars.compile(signupTemplate),
 
         compositorView: MainCompositorView.getInstance(),
+
+        userModel: UserModel.getInstance(),
 
         sessionModel: SessionModel.getInstance(),
 
@@ -48,8 +52,10 @@ define([
                 }
             }).done(function(data) {
                 self.sessionModel.set('token', data.key);
-                Backbone.history.navigate('home', {trigger: true});
+                self.userModel.fetch();
                 self.compositorView.addAlert(signupAlertDone);
+                Backbone.history.navigate('home', {trigger: true});
+
             }).fail(function() {
                 self.compositorView.addAlert(signupAlertFail);
             });
