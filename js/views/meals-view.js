@@ -6,6 +6,7 @@ define([
     'bootstrap',
     'datetimepicker',
     'moment',
+    'strings',
     'collections/meal-collection',
     'models/meal-model',
     'views/main-compositor-view',
@@ -20,6 +21,7 @@ define([
     bootstrap,
     Datetimepicker,
     moment,
+    strings,
     MealCollection,
     MealModel,
     MainCompositorView,
@@ -39,7 +41,8 @@ define([
             'click #btn-remove-meal': 'removeMeal',
             'click #btn-edit-meal': 'editMeal',
             'click #btn-next-page': 'nextPage',
-            'click #btn-previous-page': 'previousPage'
+            'click #btn-previous-page': 'previousPage',
+
         },
 
         initialize: function(options) {
@@ -54,7 +57,8 @@ define([
             });
 
             //get*page is an add event, not a change event
-            this.collection.on('change add', this.render, this);
+            this.collection.on('change add update', this.render, this);
+
 
         },
 
@@ -85,6 +89,9 @@ define([
                 delay: 150
             });
 
+            $('[data-toggle="popover"]').popover({
+            });
+
             //if
             return this;
         },
@@ -111,12 +118,38 @@ define([
 
         },
 
-        removeMeal: function() {
-            // TODO
+        removeMeal: function(e) {
+
+            //console.log($(e.currentTarget).parents().eq(1).attr('data-id'));
+
+            this.collection.remove($(e.currentTarget).parents().eq(1).attr('data-id')).destroy({
+                    url: strings.baseServerUrl + 'meals/' + $(e.currentTarget).parents().eq(1).attr('data-id') + '/'
+                }, {
+                    wait: true
+                });
+
         },
 
-        editMeal: function() {
-            // TODO
+        editMeal: function(e) {
+            var self = this;
+
+            // I want to show this row's edit-show and hide this row's edit-hide
+
+            //console.log($(e.currentTarget).parents().eq(1).children().find(
+            //    ".edit-hide"
+            //));
+
+            $(e.currentTarget).parents().eq(1).children().find(".edit-show").show();
+            $(e.currentTarget).parents().eq(1).children().find(".edit-hide").hide();
+
+
+            //$(e.currentTarget).parent().eq(1,
+            //    $('[class="edit-show"][data-id=#]).show()
+            //);
+            //
+            //this.$(e.currentTarget).parent().siblings().children(
+            //    this.$('.edit-hide').hide()
+            //)
         },
 
         nextPage: function() {

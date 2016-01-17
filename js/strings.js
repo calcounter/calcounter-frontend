@@ -4,6 +4,6 @@ define([
 
 ) {
     return {
-        baseServerUrl: 'http://calcounter.herokuapp.com/'
+        baseServerUrl: 'http://127.0.0.1:8000/'
     };
 });

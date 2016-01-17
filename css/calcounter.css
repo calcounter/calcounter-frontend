@@ -20,3 +20,7 @@
 .alert-dismissible {
    width: 100%;
 }
+
+.glyphicon {
+    padding-left: 10px;
+}

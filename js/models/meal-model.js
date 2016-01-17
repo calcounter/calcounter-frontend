@@ -8,7 +8,12 @@ define([
     moment
 ) {
     var MealModel = Backbone.Model.extend({
-        url: strings.baseServerUrl + 'meals/',
+        defaults: {
+            url: strings.baseServerUrl + 'meals/'
+        },
+        apiUrl: function() {return strings.baseServerUrl + 'meals/' + this.id + '/';}
+
     });
+
     return MealModel;
 });
