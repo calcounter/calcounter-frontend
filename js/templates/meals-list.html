@@ -5,7 +5,6 @@
     <div class="well col-sm-12">
         <label>Add a meal:</label>
         <button role="button" class="pull-right btn-primary" id="btn-add-meal">Add this meal</button>
-
         <div class="form-group">
             <div class="col-sm-2">
                 <label>Calories:</label>
@@ -26,14 +25,12 @@
             </div>
         </div>
     </div>
-
     {{#if isPrevVisible}}
         <button role="button" class="pull-left btn-default" id="btn-previous-page">Prev</button>
     {{/if}}
     {{#if isNextVisible}}
         <button role="button" class="pull-right btn-default" id="btn-next-page">Next</button>
     {{/if}}
-
     <table class="table table-striped">
         <thead><tr>
             <th class="col-sm-2">Calories</th>
@@ -44,35 +41,23 @@
         </tr></thead>
         <tbody>
         {{#each results}}
-
         <tr data-id="{{id}}">
-            <td class="editable ">
+            <td class="editable" >
                 <span class="edit-hide">{{calories}}</span>
-                <input class="collapse edit-show" type="text" id="input-edit-calories" placeholder="{{calories}}">
+                <input class="collapse edit-show" type="text" data-type="calories" value="{{calories}}">
             </td>
             <td class="editable">
                 <span class="edit-hide">{{description}}</span>
-                <input class="collapse edit-show col-sm-12" type="text" id="input-edit-description" placeholder="{{description}}">
+                <input class="collapse edit-show col-sm-12" type="text" data-type="description" value="{{description}}">
             </td>
-            <td class="editable text-right ">
+            <td class="editable text-right">
                 <span class="edit-hide">{{datetime}}</span>
-                <input class="collapse edit-show" type="text" id="input-edit-datetime" placeholder="{{datetime}}">
+                <input class="collapse edit-show" type="datetime" data-type="datetime" value="{{datetime}}">
             </td>
             <td class="text-right col-sm-1">
-                <span role="button" class="edit-hide glyphicon glyphicon-edit" id="btn-edit-meal" title="Edit" data-toggle="tooltip"  data-container="body"></span>
-                <span role="button" class="edit-hide glyphicon glyphicon-remove" id="btn-remove-meal" title="Remove" data-toggle="tooltip"  data-container="body"></span>
-                <span role="button" class="edit-show collapse glyphicon glyphicon-save" id="btn-save-meal" title="Save" data-toggle="tooltip"  data-container="body"></span>
-
-
-                <!-- tooltip + popover
-                <span id="btn-remove-meal" title="Remove" data-toggle="tooltip" data-container="body">
-                    <a class="glyphicon glyphicon-remove" id="popover-remove-meal" data-id="{{id}}" role="button" title="Are you sure?" data-toggle="popover" data-placement="right" data-content="Content"></a>
-                </span>
-                -->
-
+               <span role="button" class="edit-hide glyphicon glyphicon-remove" id="btn-remove-meal" title="Remove" data-toggle="tooltip"  data-container="body"></span>
             </td>
         </tr>
-
         {{/each}}
         </tbody>
     </table>

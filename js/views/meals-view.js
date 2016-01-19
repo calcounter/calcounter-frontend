@@ -39,7 +39,9 @@ define([
         events: {
             'click #btn-add-meal': 'addMeal',
             'click #btn-remove-meal': 'removeMeal',
-            'click #btn-edit-meal': 'editMeal',
+            'click .edit-hide': 'editMeal',
+            'keydown .edit-show': 'saveMeal',
+            'focusout .edit-show': 'saveMeal',
             'click #btn-next-page': 'nextPage',
             'click #btn-previous-page': 'previousPage',
 
@@ -131,25 +133,35 @@ define([
         },
 
         editMeal: function(e) {
+            $(e.currentTarget).hide();
+            // shows the input, sets focus to it, and places the cursor at the end of the string
+            $(e.currentTarget).siblings().show().focus().val(value);
+        },
+
+        // TODO: bug: patches twice due to enter key generating focusout
+        // TODO: compare current value to modified value and only patch if different
+        saveMeal: function(e) {
             var self = this;
 
-            // I want to show this row's edit-show and hide this row's edit-hide
+            // if the event is enter keydown or focusout
+            if (e.keyCode == '13' || e.type == 'focusout') {
+                this.model = self.collection.get($(e.currentTarget).parents().eq(1).attr('data-id'));
+                this.inputType = $(e.currentTarget).attr('data-type');
+                this.inputValue = $(e.currentTarget).val();
 
-            //console.log($(e.currentTarget).parents().eq(1).children().find(
-            //    ".edit-hide"
-            //));
+                // formatting for datetime
+                if (this.inputType == 'datetime') {
+                    this.inputValue = moment(this.inputValue, 'MMM Do YYYY, h:mm a').format();
+                }
 
-            $(e.currentTarget).parents().eq(1).children().find(".edit-show").show();
-            $(e.currentTarget).parents().eq(1).children().find(".edit-hide").hide();
-
-
-            //$(e.currentTarget).parent().eq(1,
-            //    $('[class="edit-show"][data-id=#]).show()
-            //);
-            //
-            //this.$(e.currentTarget).parent().siblings().children(
-            //    this.$('.edit-hide').hide()
-            //)
+                // patches this model
+                this.model.save(
+                    this.inputType, this.inputValue
+                , {
+                    url: strings.baseServerUrl + 'meals/' + $(e.currentTarget).parents().eq(1).attr('data-id') + '/',
+                    patch: true
+                });
+            }
         },
 
         nextPage: function() {
