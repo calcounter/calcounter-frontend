@@ -24,12 +24,17 @@
             </div>
         </div>
     </div>
-    {{#if isPrevVisible}}
+
+    <div class="text-center">
+        {{#if isPrevVisible}}
         <button role="button" class="pull-left btn-default" id="btn-previous-page">Prev</button>
-    {{/if}}
-    {{#if isNextVisible}}
+        {{/if}}
+        <span role="tooltip" class="text-center glyphicon glyphicon-question-sign" title="Click on entries to edit them." data-toggle="tooltip" data-container="body" ></span>
+        {{#if isNextVisible}}
         <button role="button" class="pull-right btn-default" id="btn-next-page">Next</button>
-    {{/if}}
+        {{/if}}
+    </div>
+
     <table class="table table-striped">
         <thead><tr>
             <th class="col-sm-2">Calories</th>

@@ -14,7 +14,7 @@ define([
     var MealCollection = Backbone.PageableCollection.extend({
         model: MealModel,
 
-        url: strings.baseServerUrl + 'meals/',
+        url: strings.baseServerUrl + 'meals/like self-rdirectio',
 
         // backbone.paginator settings
         state: {
