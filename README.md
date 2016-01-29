@@ -13,3 +13,7 @@ Planned features:
 - Filtering by day
 - Coloring each meal's wrapper red or green based on the user's calorie goal
 - Form entry with enter key
+
+Fixes that need doing:
+-Date/time should not wrap
+
