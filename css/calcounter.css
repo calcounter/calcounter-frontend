@@ -24,3 +24,17 @@
 .glyphicon {
     padding-left: 10px;
 }
+
+.divider {
+    height: 1px;
+    width: 100%;
+    border-bottom: #aaaaaa solid 1px;
+}
+
+#about {
+    padding: 1.5em;
+}
+
+#about a:hover{
+    text-decoration: none;
+}
