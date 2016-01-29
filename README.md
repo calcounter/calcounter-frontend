@@ -15,5 +15,5 @@ Planned features:
 - Form entry with enter key
 
 Fixes that need doing:
-- Date/time should not wrap
+- Editing a meal and pressing enter patches twice
 
