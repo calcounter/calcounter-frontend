@@ -135,7 +135,7 @@ define([
         editMeal: function(e) {
             $(e.currentTarget).hide();
             // shows the input, sets focus to it, and places the cursor at the end of the string
-            $(e.currentTarget).siblings().show().focus().val(value);
+            $(e.currentTarget).siblings().show().focus().val();
         },
 
         // TODO: bug: patches twice due to enter key generating focusout
@@ -144,7 +144,7 @@ define([
             var self = this;
 
             // if the event is enter keydown or focusout
-            if (e.keyCode == '13' || e.type == 'focusout') {
+            if (e.type == 'focusout' || e.keyCode == '13') {
                 this.model = self.collection.get($(e.currentTarget).parents().eq(1).attr('data-id'));
                 this.inputType = $(e.currentTarget).attr('data-type');
                 this.inputValue = $(e.currentTarget).val();
